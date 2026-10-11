@@ -38,20 +38,13 @@ export function Lineup() {
                   <h3 className={`font-display text-2xl font-semibold ${accent.text}`}>
                     {event.title}
                   </h3>
-                  <p className="mt-1 font-display text-lg text-ink">
+                  <p className="mt-1 font-display text-lg font-bold text-ink">
                     {event.date} · {event.time}
                   </p>
                   <p className="mt-2 text-sm text-muted">{event.venue}</p>
                   <p className="mt-3 text-sm leading-6 text-ink/80">{event.note}</p>
                   {event.theme && (
-                    <p className="mt-2 text-sm font-medium text-accent-deep">
-                      Theme: {event.theme}
-                    </p>
-                  )}
-                  {event.theme && (
-                    <p className="mt-2 text-sm font-medium text-accent-deep">
-                      Theme: {event.theme}
-                    </p>
+                    <p className="mt-2 text-sm italic text-accent-deep">{event.theme}</p>
                   )}
                   <a
                     href={event.mapsUrl}

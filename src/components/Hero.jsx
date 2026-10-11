@@ -38,8 +38,12 @@ export function Hero() {
       </div>
 
       <Monogram className="relative mx-auto mb-2 mt-4 w-24 md:w-32" />
-      <p className="relative mx-auto max-w-md font-display text-base leading-relaxed text-muted">
-        {hero.kicker}
+      <p className="relative mx-auto max-w-xl font-display text-base leading-relaxed text-muted">
+        {hero.kickerLines.map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
       </p>
 
       <h1 className="sr-only">

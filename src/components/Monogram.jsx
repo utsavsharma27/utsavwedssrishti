@@ -1,12 +1,16 @@
+import { site } from "../data/site.config";
+
 /** Interlocking U & S monogram with a lotus crest, drawn in the lotus theme colours. */
 export function Monogram({ className = "" }) {
+  const first = site.couple.partnerA[0];
+  const second = site.couple.partnerB[0];
   return (
     <svg
       className={className}
       viewBox="0 0 200 200"
       fill="none"
       role="img"
-      aria-label="Utsav and Srishti monogram"
+      aria-label={`${site.couple.partnerA} and ${site.couple.partnerB} monogram`}
     >
       <circle cx="100" cy="100" r="94" className="stroke-gold" strokeWidth="2.5" />
       <circle
@@ -38,7 +42,7 @@ export function Monogram({ className = "" }) {
         className="font-script fill-accent-deep"
         fontSize="96"
       >
-        U
+        {first}
       </text>
       <text
         x="122"
@@ -47,7 +51,7 @@ export function Monogram({ className = "" }) {
         className="font-script fill-gold"
         fontSize="96"
       >
-        S
+        {second}
       </text>
     </svg>
   );
