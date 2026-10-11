@@ -5,7 +5,7 @@
 
 export const site = {
   siteUrl: "https://utsavsharma27.github.io/utsavwedssrishti/",
-  defaultTheme: "marigold",
+  defaultTheme: "lotus",
   themes: [
     { id: "marigold", label: "Marigold" },
     { id: "ruby", label: "Ruby" },
