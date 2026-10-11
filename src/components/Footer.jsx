@@ -13,7 +13,8 @@ export function Footer() {
       <p className="mt-2 font-display text-lg text-ink">{displayDate}</p>
       <p className="mt-2 text-sm tracking-wide text-gold">{hashtag}</p>
       <p className="mx-auto mt-5 max-w-md text-sm text-muted">{footer.closing}</p>
-      <p className="mt-6 text-xs text-muted/80">{footer.crafted}</p>
+      <p className="mt-6 text-sm text-ink">{footer.crafted}</p>
+      <p className="mt-1 text-sm text-muted">{footer.family}</p>
     </footer>
   );
 }

@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 export function CornerMandala({ className = "" }) {
@@ -99,91 +100,130 @@ export function MarigoldGarland({ className = "" }) {
 }
 
 
+const quad = (t, p0, p1, p2) => {
+  const u = 1 - t;
+  return [
+    u * u * p0[0] + 2 * u * t * p1[0] + t * t * p2[0],
+    u * u * p0[1] + 2 * u * t * p1[1] + t * t * p2[1],
+  ];
+};
+const tangent = (t, p0, p1, p2) => {
+  const a = [2 * (1 - t) * (p1[0] - p0[0]) + 2 * t * (p2[0] - p1[0]), 2 * (1 - t) * (p1[1] - p0[1]) + 2 * t * (p2[1] - p1[1])];
+  const l = Math.hypot(a[0], a[1]) || 1;
+  return [a[0] / l, a[1] / l];
+};
+
+/** Palm blade: gold outline, midrib and fine hatching, like the card. */
+function Frond({ p0, p1, p2, width = 22, lines = 10 }) {
+  const id = useId();
+  const n = tangent(0.5, p0, p1, p2);
+  const normal = [-n[1], n[0]];
+  const e1 = [p1[0] + normal[0] * width, p1[1] + normal[1] * width];
+  const e2 = [p1[0] - normal[0] * width, p1[1] - normal[1] * width];
+  const blade = `M${p0[0]} ${p0[1]} Q${e1[0]} ${e1[1]} ${p2[0]} ${p2[1]} Q${e2[0]} ${e2[1]} ${p0[0]} ${p0[1]} Z`;
+  const hatch = [];
+  for (let i = 1; i <= lines; i++) {
+    const t = i / (lines + 1);
+    const P = quad(t, p0, p1, p2);
+    const T = tangent(t, p0, p1, p2);
+    const N = [-T[1], T[0]];
+    for (const side of [1, -1]) {
+      const Q = [P[0] + N[0] * side * width * 1.1 + T[0] * 6, P[1] + N[1] * side * width * 1.1 + T[1] * 6];
+      hatch.push(`M${P[0].toFixed(1)} ${P[1].toFixed(1)} L${Q[0].toFixed(1)} ${Q[1].toFixed(1)}`);
+    }
+  }
+  return (
+    <g>
+      <defs>
+        <clipPath id={`${id}-clip`}>
+          <path d={blade} />
+        </clipPath>
+      </defs>
+      <path d={blade} className="stroke-gold" strokeWidth="1.1" />
+      <path d={`M${p0[0]} ${p0[1]} Q${p1[0]} ${p1[1]} ${p2[0]} ${p2[1]}`} className="stroke-gold" strokeWidth="0.8" />
+      <path d={hatch.join(" ")} className="stroke-gold" strokeWidth="0.45" opacity="0.8" clipPath={`url(#${id}-clip)`} />
+    </g>
+  );
+}
+
+/** Layered lotus: cupped outer, middle, and inner petals with a gold stamen. */
+function Lotus({ x, y, s = 1 }) {
+  const id = useId();
+  const cup = "M0 0 C -15 -12 -17 -42 0 -62 C 17 -42 15 -12 0 0 Z";
+  const layers = [
+    { angles: [-62, -31, 0, 31, 62], k: 1, fill: `url(#${id}-outer)` },
+    { angles: [-40, -14, 14, 40], k: 0.72, fill: `url(#${id}-mid)` },
+    { angles: [-20, 0, 20], k: 0.46, fill: "#fdf3e6" },
+  ];
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <defs>
+        <linearGradient id={`${id}-outer`} x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stopColor="#fbeee4" />
+          <stop offset="0.55" stopColor="#f2a6bd" />
+          <stop offset="1" stopColor="#d4487a" />
+        </linearGradient>
+        <linearGradient id={`${id}-mid`} x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stopColor="#fdf6ee" />
+          <stop offset="1" stopColor="#e9739a" />
+        </linearGradient>
+      </defs>
+      {layers.map((layer, li) =>
+        layer.angles.map((a) => (
+          <g key={`${li}-${a}`} transform={`rotate(${a}) scale(${layer.k})`}>
+            <path d={cup} fill={layer.fill} className="stroke-gold" strokeWidth={1 / layer.k * 0.6} />
+          </g>
+        ))
+      )}
+      {[-4, 0, 4].map((dx) => (
+        <circle key={dx} cx={dx} cy="-6" r="1.2" className="fill-gold" />
+      ))}
+    </g>
+  );
+}
+
+/** Deep green pad with gold rim and dots, like the card's lotus pads. */
+function Pad({ cx, cy, rx, ry, rot = 0 }) {
+  const id = useId();
+  const dots = [];
+  for (let i = -3; i <= 3; i++) for (let j = -1; j <= 1; j++) dots.push([cx + i * rx * 0.22, cy + j * ry * 0.45 + (i % 2 ? 2 : 0)]);
+  return (
+    <g transform={`rotate(${rot} ${cx} ${cy})`}>
+      <defs>
+        <linearGradient id={`${id}-pad`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#2c7a58" />
+          <stop offset="1" stopColor="#14412f" />
+        </linearGradient>
+      </defs>
+      <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={`url(#${id}-pad)`} className="stroke-gold" strokeWidth="1" />
+      <ellipse cx={cx} cy={cy} rx={rx * 0.86} ry={ry * 0.8} fill="none" className="stroke-gold" strokeWidth="0.5" opacity="0.7" />
+      {dots.map(([x, y], k) => (
+        <circle key={k} cx={x} cy={y} r="0.9" className="fill-gold" />
+      ))}
+    </g>
+  );
+}
+
 export function LotusCorner({ className = "" }) {
   const reduce = useReducedMotion();
-  const draw = (delay = 0, dur = 1.8) => ({
-    initial: { pathLength: reduce ? 1 : 0 },
-    animate: { pathLength: 1 },
-    transition: { duration: dur, delay, ease: "easeInOut" },
+  const fade = (delay = 0) => ({
+    initial: { opacity: reduce ? 1 : 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 1.2, delay },
   });
-  const petals = [-50, -25, 0, 25, 50];
 
   return (
-    <svg
-      className={className}
-      viewBox="0 0 220 240"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {/* gold palm fronds */}
-      {[
-        "M10 230 C20 150 40 90 90 30",
-        "M10 230 C30 170 80 130 150 120",
-        "M10 230 C50 200 90 190 130 200",
-      ].map((d, i) => (
-        <motion.path
-          key={d}
-          d={d}
-          className="stroke-gold"
-          strokeWidth="1.2"
-          {...draw(i * 0.2, 2.2)}
-        />
-      ))}
-      {[
-        "M90 30 C60 60 40 80 20 110",
-        "M90 30 C100 70 110 100 120 130",
-        "M150 120 C140 150 120 165 100 175",
-      ].map((d, i) => (
-        <motion.path
-          key={`v${d}`}
-          d={d}
-          className="stroke-gold/80"
-          strokeWidth="0.9"
-          {...draw(0.6 + i * 0.15, 1.6)}
-        />
-      ))}
-
-      {/* deep green lotus pad */}
-      <motion.ellipse
-        cx="92"
-        cy="206"
-        rx="54"
-        ry="18"
-        className="fill-ornament stroke-gold"
-        strokeWidth="1"
-        {...draw(0.4, 1.4)}
-      />
-      {[72, 88, 104, 120].map((x) => (
-        <circle key={x} cx={x} cy={204} r="1.2" className="fill-gold" />
-      ))}
-
-      {/* pink lotus bloom */}
-      <g transform="translate(100 150)">
-        {petals.map((angle, i) => (
-          <motion.ellipse
-            key={angle}
-            cx="0"
-            cy="-26"
-            rx="13"
-            ry="30"
-            transform={`rotate(${angle})`}
-            className="fill-accent stroke-accent-deep"
-            strokeWidth="0.8"
-            fillOpacity="0.88"
-            {...draw(0.8 + i * 0.1, 1.4)}
-          />
-        ))}
-        <motion.ellipse
-          cx="0"
-          cy="-14"
-          rx="9"
-          ry="20"
-          className="fill-accent/70"
-          {...draw(1.4, 1.2)}
-        />
-        <circle cy="-4" r="4" className="fill-gold" />
-      </g>
+    <svg className={className} viewBox="0 0 220 240" fill="none" aria-hidden="true" focusable="false">
+      <motion.g {...fade(0)}>
+        <Frond p0={[12, 232]} p1={[38, 118]} p2={[92, 20]} width={20} lines={11} />
+        <Frond p0={[12, 232]} p1={[84, 140]} p2={[168, 104]} width={16} lines={9} />
+        <Frond p0={[12, 232]} p1={[60, 214]} p2={[156, 196]} width={11} lines={6} />
+      </motion.g>
+      <motion.g {...fade(0.3)}>
+        <Pad cx={112} cy={202} rx={54} ry={17} rot={-6} />
+        <path d="M108 190 Q106 176 104 170" className="stroke-ornament" strokeWidth="1" />
+        <Lotus x={104} y={170} s={1.05} />
+      </motion.g>
     </svg>
   );
 }
@@ -214,7 +254,7 @@ export function FallingPetals() {
           }}
         >
           <svg width="18" height="22" viewBox="0 0 18 22" className="fill-accent">
-            <ellipse cx="9" cy="11" rx="6" ry="10" />
+            <path d="M9 1 C 15 8 15 15 9 21 C 3 15 3 8 9 1 Z" />
           </svg>
         </span>
       ))}

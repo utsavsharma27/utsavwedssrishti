@@ -43,6 +43,16 @@ export function Lineup() {
                   </p>
                   <p className="mt-2 text-sm text-muted">{event.venue}</p>
                   <p className="mt-3 text-sm leading-6 text-ink/80">{event.note}</p>
+                  {event.theme && (
+                    <p className="mt-2 text-sm font-medium text-accent-deep">
+                      Theme: {event.theme}
+                    </p>
+                  )}
+                  {event.theme && (
+                    <p className="mt-2 text-sm font-medium text-accent-deep">
+                      Theme: {event.theme}
+                    </p>
+                  )}
                   <a
                     href={event.mapsUrl}
                     target="_blank"

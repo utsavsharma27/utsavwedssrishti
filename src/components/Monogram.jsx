@@ -19,15 +19,13 @@ export function Monogram({ className = "" }) {
       />
       {/* lotus crest */}
       <g transform="translate(100 34)">
-        {[-40, 0, 40].map((angle) => (
-          <ellipse
+        {[-36, 0, 36].map((angle) => (
+          <path
             key={angle}
-            cx="0"
-            cy="-6"
-            rx="6"
-            ry="13"
+            d="M0 0 C 5 -6 5 -16 0 -24 C -5 -16 -5 -6 0 0 Z"
             transform={`rotate(${angle})`}
-            className="fill-accent"
+            className="fill-accent stroke-accent-deep"
+            strokeWidth="0.6"
           />
         ))}
         <circle cy="2" r="3" className="fill-gold" />
