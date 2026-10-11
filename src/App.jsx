@@ -6,7 +6,6 @@ import { Invitation } from "./components/Invitation";
 import { Countdown } from "./components/Countdown";
 import { Lineup } from "./components/Lineup";
 import { Venue } from "./components/Venue";
-import { Gallery } from "./components/Gallery";
 import { Footer } from "./components/Footer";
 import { BottomNav } from "./components/BottomNav";
 import { MusicToggle } from "./components/MusicToggle";
@@ -28,7 +27,6 @@ export default function App() {
         <Countdown />
         <Lineup />
         <Venue />
-        <Gallery />
       </main>
       <Footer />
       <MusicToggle />
