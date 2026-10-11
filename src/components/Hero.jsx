@@ -14,8 +14,8 @@ export function Hero() {
       <FallingPetals />
       <LotusCorner className="pointer-events-none absolute left-0 top-0 hidden w-36 max-w-[42vw] md:block md:w-56" />
       <LotusCorner className="pointer-events-none absolute right-0 top-0 hidden w-36 max-w-[42vw] origin-center scale-x-[-1] md:block md:w-56" />
-      <LotusCorner className="pointer-events-none absolute bottom-16 left-0 w-28 max-w-[36vw] origin-center scale-y-[-1] md:w-44" />
-      <LotusCorner className="pointer-events-none absolute bottom-16 right-0 w-28 max-w-[36vw] origin-center scale-[-1] md:w-44" />
+      <LotusCorner className="pointer-events-none absolute bottom-16 left-0 w-28 max-w-[36vw] md:w-44" />
+      <LotusCorner className="pointer-events-none absolute bottom-16 right-0 w-28 max-w-[36vw] origin-center scale-x-[-1] md:w-44" />
 
       <div className="relative flex items-center justify-center gap-3 md:gap-5">
         <img
