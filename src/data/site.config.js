@@ -50,12 +50,12 @@ export const site = {
   },
   invitation: {
     eyebrow: "A humble invitation",
-    heading: "We would be honoured by your presence",
+    heading: "With hearts full of gratitude",
     paragraphs: [
-      "With grateful hearts, we invite you to share in the beginning of our new journey. Utsav and Srishti are getting married, and we would be truly blessed to have you with us.",
-      "Please join us for Haldi in the morning and our Reception in the evening. Your presence, your blessings, and your warm wishes mean more to us than any gift. We humbly request you to come and celebrate this happy occasion with us.",
+      "Together with our families, we joyfully invite you to share in the beginning of our new journey. Utsav and Srishti are getting married, and your presence and blessings would make these days truly complete.",
+      "Please join us for Haldi on 11 December in the morning and our Reception that evening. The Phere and Vidai follow on 12 December. Your love and good wishes mean more to us than any gift. We humbly request you to come and bless the couple.",
     ],
-    signOff: "With respect and love",
+    signOff: "With respect and warm regards",
   },
   countdown: {
     heading: "Until we begin our journey together",

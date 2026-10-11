@@ -2,7 +2,7 @@ import { site } from "../data/site.config";
 import { MarigoldGarland } from "./Florals";
 
 export function Invitation() {
-  const { invitation, couple } = site;
+  const { invitation } = site;
 
   return (
     <section id="invitation" className="scroll-mt-6 px-5 py-20">
@@ -21,9 +21,6 @@ export function Invitation() {
         ))}
         <p className="mt-8 font-script text-4xl text-accent-deep">
           {invitation.signOff}
-        </p>
-        <p className="mt-1 font-display text-lg text-ink">
-          {couple.partnerA} & {couple.partnerB}
         </p>
       </div>
     </section>
