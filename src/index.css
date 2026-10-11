@@ -70,15 +70,15 @@
 }
 
 [data-theme="lotus"] {
-  --page: #fbf0f4;
-  --ink: #3b1024;
-  --muted: #8a4d68;
-  --accent: #c2185b;
-  --accent-deep: #831843;
-  --gold: #c9a227;
-  --band: #2d1020;
-  --band-ink: #fde8f0;
-  --ornament: #db2777;
+  --page: #fbf6ec;
+  --ink: #4a1d1f;
+  --muted: #8a5a4f;
+  --accent: #d4487a;
+  --accent-deep: #5c1a2b;
+  --gold: #b8902a;
+  --band: #1c4a38;
+  --band-ink: #f7efd9;
+  --ornament: #1f6b4f;
 }
 
 html {

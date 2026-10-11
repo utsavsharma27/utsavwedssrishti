@@ -98,6 +98,96 @@ export function MarigoldGarland({ className = "" }) {
   );
 }
 
+
+export function LotusCorner({ className = "" }) {
+  const reduce = useReducedMotion();
+  const draw = (delay = 0, dur = 1.8) => ({
+    initial: { pathLength: reduce ? 1 : 0 },
+    animate: { pathLength: 1 },
+    transition: { duration: dur, delay, ease: "easeInOut" },
+  });
+  const petals = [-50, -25, 0, 25, 50];
+
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 220 240"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {/* gold palm fronds */}
+      {[
+        "M10 230 C20 150 40 90 90 30",
+        "M10 230 C30 170 80 130 150 120",
+        "M10 230 C50 200 90 190 130 200",
+      ].map((d, i) => (
+        <motion.path
+          key={d}
+          d={d}
+          className="stroke-gold"
+          strokeWidth="1.2"
+          {...draw(i * 0.2, 2.2)}
+        />
+      ))}
+      {[
+        "M90 30 C60 60 40 80 20 110",
+        "M90 30 C100 70 110 100 120 130",
+        "M150 120 C140 150 120 165 100 175",
+      ].map((d, i) => (
+        <motion.path
+          key={`v${d}`}
+          d={d}
+          className="stroke-gold/80"
+          strokeWidth="0.9"
+          {...draw(0.6 + i * 0.15, 1.6)}
+        />
+      ))}
+
+      {/* deep green lotus pad */}
+      <motion.ellipse
+        cx="92"
+        cy="206"
+        rx="54"
+        ry="18"
+        className="fill-ornament stroke-gold"
+        strokeWidth="1"
+        {...draw(0.4, 1.4)}
+      />
+      {[72, 88, 104, 120].map((x) => (
+        <circle key={x} cx={x} cy={204} r="1.2" className="fill-gold" />
+      ))}
+
+      {/* pink lotus bloom */}
+      <g transform="translate(100 150)">
+        {petals.map((angle, i) => (
+          <motion.ellipse
+            key={angle}
+            cx="0"
+            cy="-26"
+            rx="13"
+            ry="30"
+            transform={`rotate(${angle})`}
+            className="fill-accent stroke-accent-deep"
+            strokeWidth="0.8"
+            fillOpacity="0.88"
+            {...draw(0.8 + i * 0.1, 1.4)}
+          />
+        ))}
+        <motion.ellipse
+          cx="0"
+          cy="-14"
+          rx="9"
+          ry="20"
+          className="fill-accent/70"
+          {...draw(1.4, 1.2)}
+        />
+        <circle cy="-4" r="4" className="fill-gold" />
+      </g>
+    </svg>
+  );
+}
+
 const PETALS = [
   { left: "6%", delay: "0s", dur: "15s", drift: "18px" },
   { left: "18%", delay: "3s", dur: "18s", drift: "-22px" },

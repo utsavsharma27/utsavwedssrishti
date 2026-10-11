@@ -104,6 +104,24 @@ export const site = {
       "https://maps.google.com/maps?q=The%20Namah%20Grand%20Sector%20149%20Noida&t=&z=15&ie=UTF8&iwloc=&output=embed",
     facadeCaption: "Tap to load Google Maps. The map is not loaded until you ask, so the page stays light.",
   },
+  gallery: {
+    eyebrow: "A few frames",
+    heading: "From our story so far",
+    lightboxLabel: "Photo viewer",
+    closeLabel: "Close",
+    prevLabel: "Previous photo",
+    nextLabel: "Next photo",
+    photos: [
+      { src: "photos/01.jpg", alt: "Baraat (Dancing)", width: 336, height: 305 },
+      { src: "photos/02.jpg", alt: "Bidaai (Emotional)", width: 336, height: 305 },
+      { src: "photos/03.jpg", alt: "Mehndi", width: 336, height: 305 },
+      { src: "photos/04.jpg", alt: "Mehndi Hand (Fun)", width: 336, height: 305 },
+      { src: "photos/05.jpg", alt: "Groom's Grooming / Posing", width: 336, height: 305 },
+      { src: "photos/06.jpg", alt: "Feeding Sweets", width: 336, height: 305 },
+      { src: "photos/07.jpg", alt: "Ennippoon", width: 336, height: 305 },
+      { src: "photos/08.jpg", alt: "Selfie Moment", width: 336, height: 305 },
+    ],
+  },
   footer: {
     closing: "With blessings and love, we look forward to celebrating with you.",
     crafted: "With love, from Utsav and Srishti.",
@@ -116,6 +134,7 @@ export const navItems = [
   { id: "countdown", label: "When" },
   { id: "lineup", label: "Events" },
   { id: "venue", label: "Venue" },
+  { id: "gallery", label: "Photos" },
 ];
 
 export default site;
