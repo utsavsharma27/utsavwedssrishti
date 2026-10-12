@@ -91,11 +91,11 @@ export const site = {
     },
     {
       id: "reception",
-      title: "Reception",
+      title: "Reception (Varmala)",
       date: "11 December 2026",
       time: "7:00 PM onwards",
       venue: "The Namah Grand, Sector 149, Noida",
-      note: "An evening of dinner, good company, and blessings for the newly married couple.",
+      note: "An evening of fine dining, wonderful company, and heartfelt blessings as we celebrate a couple beginning their journey together in marriage",
       accent: "lotus",
       mapsUrl: "https://maps.app.goo.gl/kyKHVdrF3FLKGzbR7",
     },
