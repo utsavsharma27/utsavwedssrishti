@@ -1,8 +1,8 @@
-# Utsav & Srishti — wedding site
+# Abhishek & Neha — wedding site
 
 A single-page, config-driven wedding website built with Vite, React, Tailwind CSS v4, and Motion. It deploys to GitHub Pages.
 
-[Hosted website](https://utsavsharma27.github.io/utsavwedssrishti/)
+[Hosted website](https://abhishekj22.github.io/wedding-invitation/)
 
 ## Edit the site (non-technical)
 
