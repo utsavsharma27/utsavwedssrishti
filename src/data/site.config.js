@@ -34,7 +34,7 @@ export const site = {
     ganeshRight: "photos/ganesh-right.png",
   },
   hashtag: "#SrishtiMeinUtsav",
-  weddingDateIso: "2026-12-11T11:00:00+05:30",
+  weddingDateIso: "2026-12-11T10:00:00+05:30",
   displayDate: "11 December 2026",
   city: "Noida, Uttar Pradesh",
   music: {
@@ -43,6 +43,12 @@ export const site = {
     labelPause: "Pause music",
   },
   skipLink: "Skip to content",
+  splash: {
+    image: "photos/goddess.png",
+    alt: "Goddess seated on a tiger, blessing the celebration",
+    jai: "Jai Mata Di",
+    prompt: "Scroll up to open the card",
+  },
   hero: {
     kickerLines: [
       "With the divine blessings of",
@@ -82,7 +88,7 @@ export const site = {
       id: "haldi",
       title: "Haldi",
       date: "11 December 2026",
-      time: "11:00 AM onwards",
+      time: "10:00 AM onwards",
       venue: "The Namah Grand, Sector 149, Noida",
       note: "Turmeric, blessings, and joyful memories. Please come in traditional clothes if you wish.",
       theme: "Dress in lavender, the colour of the day, and let us make the Haldi a little bit purple!",
@@ -91,7 +97,7 @@ export const site = {
     },
     {
       id: "reception",
-      title: "Reception",
+      title: "Reception (Varmala)",
       date: "11 December 2026",
       time: "7:00 PM onwards",
       venue: "The Namah Grand, Sector 149, Noida",
